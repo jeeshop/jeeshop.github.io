@@ -1,0 +1,60 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox" ng-controller="HomeSlidesController">
+        <div class="item" ng-repeat="i in getNumber(numberOfSlides) track by $index" ng-class="{active : $index==0}">
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
+                 alt="First slide">
+
+            <div class="container">
+                <div class="carousel-caption">
+                    <h1>{{'slide'+($index+1)+'.title' | translate}}</h1>
+
+                    <p>{{'slide'+($index+1)+'.description' | translate}}</p>
+
+                    <p><a class="btn btn-lg btn-primary" href="#description"
+                          role="button">{{'learn.more'|translate}}</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div><!-- /.carousel -->
+
+<div class="container marketing" ng-controller="HomeSlidesController">
+
+    <!-- START THE FEATURETTES -->
+
+    <span ng-repeat="i in getNumber(numberOfSlides) track by $index">
+        <hr class="featurette-divider" id="description"/>
+
+        <div class="row featurette">
+            <div class="col-md-7" ng-class="{'col-md-push-5' : ($index+1)%2 == 1}">
+                <h2 class="featurette-heading">{{'slide'+($index+1)+'.title' | translate}}</h2>
+
+                <p class="lead">{{'slide'+($index+1)+'.fulldescription' | translate}}</p>
+            </div>
+            <div class="col-md-5" ng-class="{'col-md-pull-7' : ($index+1)%2 == 1}">
+                <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto"
+                     alt="Generic placeholder image">
+            </div>
+        </div>
+    </span>
+
+    <hr class="featurette-divider">
+
+</div>
+
+<!-- /END THE FEATURETTES -->
