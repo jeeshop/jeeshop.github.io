@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Jeeshop is an open-source e-commerce solution project using innovative technologies, such as Java EE 7 and AngularJS, to build responsive and robust e-commerce websites ">
+    <meta name="description" content="Jeeshop is an open-source e-commerce solution project using Java EE 7 and AngularJS">
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
@@ -36,20 +36,21 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a ui-sref="home">Home</a></li>
-                        <li><a ui-sref="about">About</a></li>
-                        <!-- <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <li class="active"><a ui-sref="home">{{'home'|translate}}</a></li>
+                        <li><a ui-sref="about">{{'about'|translate}}</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Documentation<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li class="dropdown-header">Nav header</li>
-                                <li><a href="#">Separated link</a></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li><a href="#">{{'install' | translate}}</a></li>
+                                <li><a href="#">{{'user.guide'|translate}}</a></li>
                             </ul>
-                        </li>-->
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="https://github.com/remibantos/jeeshop">
+                            <span class="fa fa-github"></span>
+                        </a></li>
                     </ul>
                 </div>
             </div>

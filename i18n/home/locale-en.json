@@ -1,12 +1,12 @@
 {
   "learn.more" : "Learn more",
-  "slide1.title" : "Build your e-commerce shop",
-  "slide1.description" : "Build your e-commerce store using innovative and reliable technologies stack.",
+  "slide1.title" : "Build your e-commerce shop quick",
+  "slide1.description" : "Build your e-commerce store using innovative technologies (AngularJS, Java EE 7, REST API for backend... ).",
   "featurette1.fulldescription" : "TODO COMPLETE THIS SECTION",
   "slide2.title" : "Administer your store",
-  "slide2.description" : "Use Jeeshop Admin, a light and responsive BackOffice application to manage your store.",
+  "slide2.description" : "Use Jeeshop-Admin, a light and responsive BackOffice application to manage your store, everywhere !",
   "featurette2.fulldescription" : "TODO COMPLETE THIS SECTION",
-  "slide3.title" : "Contribute to Jeeshop 1.0 release",
-  "slide3.description" : "Jeeshop is an open-source Apache V2 licensed project. You can contribute to it and help us to release its first version!",
+  "slide3.title" : "Contribute to Jeeshop development !",
+  "slide3.description" : "Jeeshop is an open-source Apache V2 licensed project hosted on GitHub. Contribute to its development or adapt it to suit your needs!",
   "featurette3.fulldescription" : "TODO COMPLETE THIS SECTION"
 }
