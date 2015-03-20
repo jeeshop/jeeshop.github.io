@@ -16,7 +16,7 @@
 
                     <p>{{'slide'+($index+1)+'.description' | translate}}</p>
 
-                    <p><a class="btn btn-lg btn-primary" href="#description"
+                    <p><a class="btn btn-lg btn-primary" href="#description_{{$index}}"
                           role="button">{{'learn.more'|translate}}</a></p>
                 </div>
             </div>
@@ -38,7 +38,7 @@
     <!-- START THE FEATURETTES -->
 
     <span ng-repeat="i in getNumber(numberOfSlides) track by $index">
-        <hr class="featurette-divider" id="description"/>
+        <hr class="featurette-divider" id="description_{{$index}}"/>
 
         <div class="row featurette">
             <div class="col-md-7" ng-class="{'col-md-push-5' : ($index+1)%2 == 1}">

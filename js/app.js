@@ -3,25 +3,27 @@
     var app = angular.module('jeeshopSite', ['ngCookies', 'ngSanitize', 'ui.router', 'pascalprecht.translate']);
 
 
-    app.controller('HomeSlidesController', function($scope){
+    app.controller('HomeSlidesController', function ($scope) {
         var ctrl = this;
 
         $scope.numberOfSlides = 3;
-        $scope.getNumber = function(num) {
+        $scope.getNumber = function (num) {
             return new Array(num);
         }
     });
 
-    app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    app.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $translatePartialLoaderProvider,$locationProvider) {
         // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise("");
+        $urlRouterProvider.otherwise("home");
+
+        $locationProvider.hashPrefix("!")
 
         // Now set up the states
         $stateProvider
             .state('home', {
                 url: "/home",
                 templateUrl: "partials/home.html",
-                controller : function($translatePartialLoader, $translate){
+                controller: function ($translatePartialLoader, $translate) {
                     $translatePartialLoader.addPart('home');
                     $translate.refresh();
                 }
@@ -29,7 +31,7 @@
             .state('index', {
                 url: "",
                 templateUrl: "partials/home.html",
-                controller : function($translatePartialLoader, $translate){
+                controller: function ($translatePartialLoader, $translate) {
                     $translatePartialLoader.addPart('home');
                     $translate.refresh();
                 }
@@ -37,14 +39,11 @@
             .state('about', {
                 url: "about",
                 templateUrl: "partials/about.html",
-                controller : function($translatePartialLoader, $translate){
+                controller: function ($translatePartialLoader, $translate) {
                     $translatePartialLoader.addPart('about');
                     $translate.refresh();
                 }
             });
-    }]);
-
-    app.config( function ($translateProvider,$translatePartialLoaderProvider) {
 
         // TODO pull request to angular-translate
         var getLocale = function () {
@@ -59,7 +58,10 @@
             return lang_id;
         };
 
+        $translatePartialLoaderProvider.addPart('about');
         $translatePartialLoaderProvider.addPart('common');
+        $translatePartialLoaderProvider.addPart('home');
+        $translatePartialLoaderProvider.addPart('projects');
 
         $translateProvider.useLoader('$translatePartialLoader', {
             urlTemplate: 'i18n/{part}/locale-{lang}.json'
@@ -70,5 +72,4 @@
         });
     });
 
-
-    })();
+})();
