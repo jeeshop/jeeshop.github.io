@@ -2,6 +2,7 @@
   "title" : "Build your JavaEE shop",
   "about" : "About",
   "home" : "Home",
-  "user.guide" : "User guide",
-  "install" : "Installation"
+  "doc.jeeshopadmin.userguide" : "Jeeshop-Admin user guide",
+  "doc.backend.api" : "REST API",
+  "doc.install" : "Install"
 }

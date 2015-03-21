@@ -1,12 +1,12 @@
 {
   "learn.more" : "En savoir plus",
-  "slide1.title" : "Développez rapidement votre boutique",
-  "slide1.description" : "Développez rapidement votre boutique à l'aide de technologies innovantes.",
+  "slide1.title" : "Développez votre boutique",
+  "slide1.description" : "Développez rapidement votre boutique à l'aide de technologies récentes, Java EE 7 et AngularJS.",
   "slide1.fulldescription" : "A compléter !",
-  "slide2.title" : "Gérez efficacement votre boutique",
-  "slide2.description" : "Gérez votre commerce avec Jeeshop-Admin, une application légère et rapide, depuis votre poste de travail ou votre smartphone !",
+  "slide2.title" : "Gérez votre boutique",
+  "slide2.description" : "Gérez efficacement votre commerce avec Jeeshop-Admin, depuis votre poste de travail ou votre smartphone.",
   "slide2.fulldescription" : "A compléter !",
-  "slide3.title" : "Contribuez au développement de Jeeshop",
-  "slide3.description" : "Jeeshop est un projet open-source sous license Apache V2. Participez à son développement ou adaptez-le à vos besoins.",
+  "slide3.title" : "Participez",
+  "slide3.description" : "Contribuez au développement de Jeeshop, un projet open-source sous license Apache V2.",
   "slide3.fulldescription" : "A compléter !"
 }

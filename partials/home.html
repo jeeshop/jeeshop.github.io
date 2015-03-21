@@ -1,4 +1,4 @@
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="7000">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -46,9 +46,8 @@
 
                 <p class="lead">{{'slide'+($index+1)+'.fulldescription' | translate}}</p>
             </div>
-            <div class="col-md-5" ng-class="{'col-md-pull-7' : ($index+1)%2 == 1}">
-                <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto"
-                     alt="Generic placeholder image">
+            <div class="col-md-5 text-center" ng-class="{'col-md-pull-7' : ($index+1)%2 == 1}">
+                <span class="fa fa-5x" ng-class="{'fa-shopping-cart' : $index==0, 'fa-barcode' : $index==1, 'fa-github' : $index==2}"></span>
             </div>
         </div>
     </span>

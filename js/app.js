@@ -7,9 +7,11 @@
         var ctrl = this;
 
         $scope.numberOfSlides = 3;
+
         $scope.getNumber = function (num) {
             return new Array(num);
-        }
+        };
+
     });
 
     app.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $translatePartialLoaderProvider,$locationProvider) {
