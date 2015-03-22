@@ -33,7 +33,13 @@ body {
     width: auto;
 }
 
+.carousel-caption h1{
+    padding-bottom: 1em;
+}
 
+.carousel-caption p{
+    padding-bottom: 1em;
+}
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
