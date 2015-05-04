@@ -3,6 +3,6 @@
   "about" : "About",
   "home" : "Home",
   "doc.jeeshopadmin.userguide" : "Jeeshop-Admin user guide",
-  "doc.backend.api" : "REST API",
+  "doc.backend.catalog.api" : "Catalog REST API",
   "doc.install" : "Install"
 }

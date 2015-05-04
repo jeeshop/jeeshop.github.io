@@ -15,10 +15,8 @@
     });
 
     app.config(function ($stateProvider, $urlRouterProvider, $translateProvider, $translatePartialLoaderProvider,$locationProvider) {
-        // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise("home");
 
-        $locationProvider.hashPrefix("!")
+        $locationProvider.hashPrefix("!");
 
         // Now set up the states
         $stateProvider
@@ -39,10 +37,18 @@
                 }
             })
             .state('about', {
-                url: "about",
+                url: "/about",
                 templateUrl: "partials/about.html",
                 controller: function ($translatePartialLoader, $translate) {
                     $translatePartialLoader.addPart('about');
+                    $translate.refresh();
+                }
+            })
+            .state('rest', {
+                url: "/rest",
+                templateUrl: "partials/rest.html",
+                controller: function ($translatePartialLoader, $translate) {
+                    $translatePartialLoader.addPart('rest');
                     $translate.refresh();
                 }
             });
@@ -60,10 +66,10 @@
             return lang_id;
         };
 
-        $translatePartialLoaderProvider.addPart('about');
         $translatePartialLoaderProvider.addPart('common');
         $translatePartialLoaderProvider.addPart('home');
-        $translatePartialLoaderProvider.addPart('projects');
+        $translatePartialLoaderProvider.addPart('about');
+        $translatePartialLoaderProvider.addPart('rest');
 
         $translateProvider.useLoader('$translatePartialLoader', {
             urlTemplate: 'i18n/{part}/locale-{lang}.json'
