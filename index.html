@@ -60,13 +60,12 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">Documentation<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a target="_blank" href="https://github.com/remibantos/jeeshop#readme">{{'doc.install' | translate}}</a></li>
-                                <li><a target="_blank" href="docs/1.0/rest/catalog/generated-docs/rest-api.html">{{'doc.backend.catalog.api'|translate}}</a></li>
-                                <li><a target="_blank" href="docs/1.0/rest/catalog/generated-docs/rest-api.html">{{'doc.backend.user.api'|translate}}</a></li>
-                                <li><a href="#" style="font-style: italic">{{'doc.jeeshopadmin.userguide'|translate}}</a></li>
+                                <li><a target="_blank" href="https://github.com/remibantos/jeeshop#readme">{{'doc.userguide' | translate}}</a></li>
+                                <li><a target="_blank" href="docs/1.0/rest/catalog/generated-docs/rest-api.html" ng-bind-html="'doc.backend.catalog.api'|translate"></a></li>
+                                <li><a target="_blank" href="docs/1.0/rest/user/generated-docs/rest-api.html" ng-bind-html="'doc.backend.user.api'|translate"></a></li>
                             </ul>
                         </li>
-                        <li><a ui-sref="about">{{'about'|translate}}</a></li>
+                        <!--<li><a ui-sref="about">{{'about'|translate}}</a></li>-->
                     </ul>
 
                     <ul class="nav navbar-nav navbar-right">

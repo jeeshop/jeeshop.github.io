@@ -8,13 +8,13 @@
     <div class="carousel-inner" role="listbox" ng-controller="HomeSlidesController">
         <div class="item" ng-repeat="i in getNumber(numberOfSlides) track by $index" ng-class="{active : $index==0}">
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=="
-                 alt="First slide">
+                 alt="Slide {{$index}}">
 
             <div class="container">
                 <div class="carousel-caption">
                     <h1>{{'slide'+($index+1)+'.title' | translate}}</h1>
 
-                    <p>{{'slide'+($index+1)+'.description' | translate}}</p>
+                    <p ng-bind-html="'slide'+($index+1)+'.description' | translate"></p>
 
                     <p><a class="btn btn-lg btn-primary" href="#description_{{$index}}"
                           role="button">{{'learn.more'|translate}}</a></p>
