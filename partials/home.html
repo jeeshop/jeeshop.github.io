@@ -44,7 +44,7 @@
             <div class="col-md-7" ng-class="{'col-md-push-5' : ($index+1)%2 == 1}">
                 <h2 class="featurette-heading">{{'slide'+($index+1)+'.title' | translate}}</h2>
 
-                <p class="lead">{{'slide'+($index+1)+'.fulldescription' | translate}}</p>
+                <p class="lead" ng-bind-html="'slide'+($index+1)+'.fulldescription' | translate"></p>
             </div>
             <div class="col-md-5 text-center" ng-class="{'col-md-pull-7' : ($index+1)%2 == 1}">
                 <span class="fa fa-5x" ng-class="{'fa-shopping-cart' : $index==0, 'fa-barcode' : $index==1, 'fa-github' : $index==2}"></span>
