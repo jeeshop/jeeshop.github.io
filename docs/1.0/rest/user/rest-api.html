@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>{resourceName} Resource</title>
+<title>User REST Api</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -505,35 +505,71 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#user-rest-api">1. User REST Api</a>
 <ul class="sectlevel2">
-<li><a href="#resourcename-resource">1. {resourceName} Resource</a>
+<li><a href="#user-resource">1.1. User Resource</a>
 <ul class="sectlevel3">
-<li><a href="#get-all-itemtype-items">1.1. Get all {itemType} items</a></li>
-<li><a href="#get-itemtype-items-count">1.2. Get {itemType} items count</a></li>
-<li><a href="#get-a-specific-itemtype">1.3. Get a specific {itemType}</a></li>
-<li><a href="#create-a-itemtype">1.4. Create a {itemType}</a></li>
-<li><a href="#modify-a-itemtype">1.5. Modify a {itemType}</a></li>
-<li><a href="#delete-a-itemtype">1.6. Delete a {itemType}</a></li>
-<li><a href="#get-itemtype-related-locales">1.7. Get {itemType} related locales</a></li>
-<li><a href="#get-itemtype-localized-content">1.8. Get {itemType} localized content</a></li>
-<li><a href="#delete-itemtype-localized-content">1.9. Delete {itemType} localized content</a></li>
-<li><a href="#create-itemtype-localized-content">1.10. Create {itemType} localized content</a></li>
-<li><a href="#modify-itemtype-localized-content">1.11. Modify {itemType} localized content</a></li>
-<li><a href="#get-itemtype-related-skus">1.12. Get {itemType} related skus</a></li>
-<li><a href="#get-itemtype-related-discounts">1.13. Get {itemType} related discounts</a></li>
+<li><a href="#get-all-users">1.1.1. Get all users</a></li>
+<li><a href="#get-users-count">1.1.2. Get users count</a></li>
+<li><a href="#get-a-specific-user">1.1.3. Get a specific user</a></li>
+<li><a href="#create-a-user">1.1.4. Create a user</a></li>
+<li><a href="#modify-a-user">1.1.5. Modify a user</a></li>
+<li><a href="#delete-a-user">1.1.6. Delete a user</a></li>
+<li><a href="#activate-a-user">1.1.7. Activate a user</a></li>
+<li><a href="#request-user-password-reset">1.1.8. Request user password reset</a></li>
+<li><a href="#reset-user-password">1.1.9. Reset user password</a></li>
+<li><a href="#authenticate-a-user">1.1.10. Authenticate a user</a></li>
+</ul>
+</li>
+<li><a href="#mail-template-resource">1.2. Mail template Resource</a>
+<ul class="sectlevel3">
+<li><a href="#get-all-mail-templates">1.2.1. Get all mail templates</a></li>
+<li><a href="#get-mail-templates-count">1.2.2. Get mail templates count</a></li>
+<li><a href="#get-a-specific-mail-template">1.2.3. Get a specific mail template</a></li>
+<li><a href="#create-a-mail-template">1.2.4. Create a mail template</a></li>
+<li><a href="#modify-a-mail-template">1.2.5. Modify a mail template</a></li>
+<li><a href="#delete-a-mail-template">1.2.6. Delete a mail template</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 <div id="content">
+<div class="sect1">
+<h2 id="user-rest-api"><a class="anchor" href="#user-rest-api"></a>1. User REST Api</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The following general principles apply to every REST operations :
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Items relationships are always lazyloaded and must be explicitly requested to retrieve them. (they are not eagerly fetched)</p>
+</li>
+<li>
+<p>Role based access requires authentication. Authentication is performed using JaaS for operations which require specific roles such as <em>admin</em> or <em>user</em>, in a stateless way for each request. See <a href="https://github.com/remibantos/jeeshop#security-domain-configuration">this link</a> for details about JaaS configuration in Jeeshop backend.</p>
+</li>
+</ul>
+</div>
 <div class="sect2">
-<h3 id="resourcename-resource"><a class="anchor" href="#resourcename-resource"></a>1. {resourceName} Resource</h3>
+<h3 id="user-resource"><a class="anchor" href="#user-resource"></a>1.1. User Resource</h3>
 <div class="paragraph">
-<p>Manages {itemType} items and their relationships.</p>
+<p>Manages users.</p>
 </div>
 <div class="sect3">
-<h4 id="get-all-itemtype-items"><a class="anchor" href="#get-all-itemtype-items"></a>1.1. Get all {itemType} items</h4>
+<h4 id="get-all-users"><a class="anchor" href="#get-all-users"></a>1.1.1. Get all users</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -543,7 +579,7 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}</p>
+<p>/rs/users</p>
 </div></div></td>
 </tr>
 <tr>
@@ -577,7 +613,7 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">search</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Search criteria. Value should match item&#8217;s <em>id</em>, <em>name</em> or <em>description</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search criteria. Value should match user&#8217;s  <em>login</em>, <em>first name</em>, or <em>last name</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">start</p></td>
@@ -594,7 +630,8 @@ table.CodeRay td.code>pre{padding:0}
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sort criteria. Defaults to <em>id</em>.<br>
 Possible values are :
-<em>id</em> | <em>name</em> | <em>description</em> | <em>startDate</em> | <em>endDate</em> | <em>disabled</em></p></td>
+<em>id</em> | <em>login</em> | <em>gender</em> | <em>firstname</em> | <em>lastname</em> | <em>disabled</em> | <em>activated</em> | <em>newslettersSubscribed</em>
+| <em>birthDate</em> | _ phoneNumber_ | <em>preferredLocale</em> | <em>creationDate</em> | _updateDate</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">isDesc</p></td>
@@ -628,14 +665,14 @@ Possible values are :
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.list.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/User.list.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="get-itemtype-items-count"><a class="anchor" href="#get-itemtype-items-count"></a>1.2. Get {itemType} items count</h4>
+<h4 id="get-users-count"><a class="anchor" href="#get-users-count"></a>1.1.2. Get users count</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -645,7 +682,7 @@ Possible values are :
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/count</p>
+<p>/rs/users/count</p>
 </div></div></td>
 </tr>
 <tr>
@@ -706,14 +743,14 @@ Possible values are :
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}_count.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/user_count.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="get-a-specific-itemtype"><a class="anchor" href="#get-a-specific-itemtype"></a>1.3. Get a specific {itemType}</h4>
+<h4 id="get-a-specific-user"><a class="anchor" href="#get-a-specific-user"></a>1.1.3. Get a specific user</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -723,13 +760,95 @@ Possible values are :
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]</p>
+<p>/rs/users/[id]</p>
 </div></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id of the user item to retrieve</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No user found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/user.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="create-a-user"><a class="anchor" href="#create-a-user"></a>1.1.4. Create a user</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/users</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>POST</p>
 </div></div></td>
 </tr>
 <tr>
@@ -755,101 +874,10 @@ Possible values are :
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user item</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item to retrieve</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation item (localized content) in response</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">403</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When provided authenticated has user role (not admin) and item is not visible</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.json.adoc[]</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="create-a-itemtype"><a class="anchor" href="#create-a-itemtype"></a>1.4. Create a {itemType}</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>POST</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The {itemType} item to create.<br>
-Mandatory properties are : <em>name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user to create.<br>
+Mandatory properties are : <em>login</em>, <em>password</em>, <em>firstname</em>, <em>lastname</em></p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -857,7 +885,7 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.in.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/user.in.json.adoc[]</p>
 </div></div></td>
 </tr>
 <tr>
@@ -876,20 +904,28 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When provided user entity or related entities have an id defined. (Id is created during persistence and cannot be provided for entity creation). Also happens when user country  does not belong to allowed countries list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When a user with same login already exists (login is unique)</p></td>
+</tr>
 </tbody>
 </table></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/user.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="modify-a-itemtype"><a class="anchor" href="#modify-a-itemtype"></a>1.5. Modify a {itemType}</h4>
+<h4 id="modify-a-user"><a class="anchor" href="#modify-a-user"></a>1.1.5. Modify a user</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -899,7 +935,7 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}</p>
+<p>/rs/users</p>
 </div></div></td>
 </tr>
 <tr>
@@ -911,7 +947,7 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
+<p><em>admin</em>, <em>user</em></p>
 </div></div></td>
 </tr>
 <tr>
@@ -931,10 +967,10 @@ Mandatory properties are : <em>name</em></p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user item</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The {itemType} item to modify.<br>
-Mandatory properties are : <em>name</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user to modify.<br>
+Mandatory properties are : <em>login</em>, <em>password</em>, <em>firstname</em>, <em>lastname</em></p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -942,7 +978,7 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/user.json.adoc[]</p>
 </div></div></td>
 </tr>
 <tr>
@@ -962,8 +998,8 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When provided user entity to modify does not match current authenticated user entity</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -971,14 +1007,14 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/user.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="delete-a-itemtype"><a class="anchor" href="#delete-a-itemtype"></a>1.6. Delete a {itemType}</h4>
+<h4 id="delete-a-user"><a class="anchor" href="#delete-a-user"></a>1.1.6. Delete a user</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -988,7 +1024,7 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]</p>
+<p>/rs/users/[id]</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1020,9 +1056,9 @@ Mandatory properties are : <em>name</em></p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">user id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item to delete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id of the user to delete</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1043,10 +1079,6 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
 </tbody>
 </table></div></td>
 </tr>
@@ -1054,7 +1086,7 @@ Mandatory properties are : <em>name</em></p></td>
 </table>
 </div>
 <div class="sect3">
-<h4 id="get-itemtype-related-locales"><a class="anchor" href="#get-itemtype-related-locales"></a>1.7. Get {itemType} related locales</h4>
+<h4 id="activate-a-user"><a class="anchor" href="#activate-a-user"></a>1.1.7. Activate a user</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1064,97 +1096,13 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentationslocales</p>
+<p>/rs/users/[login]</p>
 </div></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GET</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">[<span class="string"><span class="delimiter">&quot;</span><span class="content">fr_FR</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">en_GB</span><span class="delimiter">&quot;</span></span>]</code></pre>
-</div>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="get-itemtype-localized-content"><a class="anchor" href="#get-itemtype-localized-content"></a>1.8. Get {itemType} localized content</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentations/[locale]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GET</p>
+<p>PUT</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1180,14 +1128,100 @@ Mandatory properties are : <em>name</em></p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">login</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user login, used as a key to retrieve the persisted user item to activate.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">token</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An activation token provided to user during creation.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/UUID.json.adoc[]</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no user found matching provided login</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="request-user-password-reset"><a class="anchor" href="#request-user-password-reset"></a>1.1.8. Request user password reset</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/users/[login]/password</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>POST</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>ALL</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">login</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user login, used as a key to retrieve the persisted user item to activate.</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1210,22 +1244,16 @@ Mandatory properties are : <em>name</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no user found matching provided login</p></td>
 </tr>
 </tbody>
 </table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
-</div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="delete-itemtype-localized-content"><a class="anchor" href="#delete-itemtype-localized-content"></a>1.9. Delete {itemType} localized content</h4>
+<h4 id="reset-user-password"><a class="anchor" href="#reset-user-password"></a>1.1.9. Reset user password</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1235,13 +1263,181 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentations/[locale]</p>
+<p>/rs/users/[login]/password</p>
 </div></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>DELETE</p>
+<p>PUT</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>ALL</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">login</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user login, used as a key to retrieve the persisted user item to activate.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">token</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A reset password token provided to user by e-mail during "Request user password" process.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">new password</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A new user password.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When provided user login does not match current authenticated user login</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no user found matching provided login and token</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="authenticate-a-user"><a class="anchor" href="#authenticate-a-user"></a>1.1.10. Authenticate a user</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/users</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>HEAD</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>ALL</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Basic realm</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Standard Basic HTTP header with basic realm containing user login and password ("login:password" string Base 64 encoded)</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="mail-template-resource"><a class="anchor" href="#mail-template-resource"></a>1.2. Mail template Resource</h3>
+<div class="paragraph">
+<p>Manages mail templates.</p>
+</div>
+<div class="sect3">
+<h4 id="get-all-mail-templates"><a class="anchor" href="#get-all-mail-templates"></a>1.2.1. Get all mail templates</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/mailtemplates</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1267,14 +1463,165 @@ Mandatory properties are : <em>name</em></p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template name to search</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">start</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">results start offset</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">results size</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">orderBy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort criteria. Defaults to <em>id</em>.<br>
+Possible values are :
+<em>id</em> | <em>name</em> | <em>locale</em> | <em>creationDate</em> | <em>updateDate</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isDesc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort direction. Defaults to <em>false</em>.<br>
+Possible values are :
+<em>true</em> | <em>false</em></p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/MailTemplate.list.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="get-mail-templates-count"><a class="anchor" href="#get-mail-templates-count"></a>1.2.2. Get mail templates count</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/mailtemplates/count</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate_count.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="get-a-specific-mail-template"><a class="anchor" href="#get-a-specific-mail-template"></a>1.2.3. Get a specific mail template</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/mailtemplates/[id]</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id of the mail template to retrieve</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1297,7 +1644,7 @@ Mandatory properties are : <em>name</em></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No result found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1305,14 +1652,14 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="create-itemtype-localized-content"><a class="anchor" href="#create-itemtype-localized-content"></a>1.10. Create {itemType} localized content</h4>
+<h4 id="create-a-mail-template"><a class="anchor" href="#create-a-mail-template"></a>1.2.4. Create a mail template</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1322,7 +1669,7 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentations/[locale]</p>
+<p>/rs/mailtemplates</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1354,19 +1701,10 @@ Mandatory properties are : <em>name</em></p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Presentation object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a valid Presentation object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The mail template to create.<br>
+Mandatory properties are : <em>name</em>, <em>content</em>, <em>subject</em></p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1374,7 +1712,7 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate.in.json.adoc[]</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1394,12 +1732,8 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When there is an existing presentation configured for given locale</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When a mailtemplate with same name and locale already exists</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1407,14 +1741,14 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="modify-itemtype-localized-content"><a class="anchor" href="#modify-itemtype-localized-content"></a>1.11. Modify {itemType} localized content</h4>
+<h4 id="modify-a-mail-template"><a class="anchor" href="#modify-a-mail-template"></a>1.2.5. Modify a mail template</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1424,7 +1758,7 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentations/[locale]</p>
+<p>/rs/mailtemplates</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1456,19 +1790,10 @@ Mandatory properties are : <em>name</em></p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template item</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Presentation object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a valid Presentation object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The mail template to modify.<br>
+Mandatory properties are : <em>name</em>, <em>content</em>, <em>subject</em></p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1476,7 +1801,7 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/ma template.json.adoc[]</p>
 </div></div></td>
 </tr>
 <tr>
@@ -1496,12 +1821,8 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When not presentation found matching given parameters</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When a mailtemplate with same name and locale but another id already exists</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1509,14 +1830,14 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="get-itemtype-related-skus"><a class="anchor" href="#get-itemtype-related-skus"></a>1.12. Get {itemType} related skus</h4>
+<h4 id="delete-a-mail-template"><a class="anchor" href="#delete-a-mail-template"></a>1.2.6. Delete a mail template</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1526,19 +1847,19 @@ Mandatory properties are : <em>name</em></p></td>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/skus</p>
+<p>/rs/mailtemplates/[id]</p>
 </div></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GET</p>
+<p>DELETE</p>
 </div></div></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>All</p>
+<p><em>admin</em></p>
 </div></div></td>
 </tr>
 <tr>
@@ -1558,14 +1879,9 @@ Mandatory properties are : <em>name</em></p></td>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item to retrieve</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation items (localized content) matching given locale</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id of the mail template to delete</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1586,192 +1902,19 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found with given parameters</p></td>
-</tr>
 </tbody>
 </table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">[
-  {
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 10</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 10</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1403067172000</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1412139172000</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">price</span><span class="delimiter">&quot;</span></span>: <span class="float">10.0</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">currency</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">reference</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">X1213JJLB-1</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">threshold</span><span class="delimiter">&quot;</span></span>: <span class="integer">3</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">quantity</span><span class="delimiter">&quot;</span></span>: <span class="integer">100</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">discountsIds</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">available</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>
-  },
-  {
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">2</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 50</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 50</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1412225572000</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1420091572000</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">price</span><span class="delimiter">&quot;</span></span>: <span class="float">10.0</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">currency</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">reference</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">X1213JJLB-2</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">threshold</span><span class="delimiter">&quot;</span></span>: <span class="integer">3</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">quantity</span><span class="delimiter">&quot;</span></span>: <span class="integer">100</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">discountsIds</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">available</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>
-  }
-]</code></pre>
-</div>
-</div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="get-itemtype-related-discounts"><a class="anchor" href="#get-itemtype-related-discounts"></a>1.13. Get {itemType} related discounts</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/discounts</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GET</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>All</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item to retrieve</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation items (localized content) matching given locale</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found with given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">[
-    {
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">4</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">First order - 10 percent</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">10 percent off for user first order</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">voucherCode</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">usesPerCustomer</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">DISCOUNT_RATE</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">triggerRule</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER_NUMBER</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">applicableTo</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">triggerValue</span><span class="delimiter">&quot;</span></span>: <span class="float">1.0</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">discountValue</span><span class="delimiter">&quot;</span></span>: <span class="float">20.0</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">rateType</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">uniqueUse</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>
-    },
-    {
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">5</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Christmas 2015 - Free delivery fee</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Free delivery fee for christmas</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1418598000000</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1419980400000</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">voucherCode</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">usesPerCustomer</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">SHIPPING_FEE_DISCOUNT_AMOUNT</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">triggerRule</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">applicableTo</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER</span><span class="delimiter">&quot;</span></span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">triggerValue</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">discountValue</span><span class="delimiter">&quot;</span></span>: <span class="float">12.0</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">rateType</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-      <span class="key"><span class="delimiter">&quot;</span><span class="content">uniqueUse</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>
-    }
-]</code></pre>
 </div>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-06-08 11:18:51 CEST
+Last updated 2015-06-09 16:11:58 CEST
 </div>
 </div>
 </body>

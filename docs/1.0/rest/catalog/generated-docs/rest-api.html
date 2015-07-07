@@ -616,6 +616,9 @@ The following general principles apply to every REST operations :
 <li>
 <p>Items relationships are always lazyloaded and must be explicitly requested to retrieve them. (they are not eagerly fetched)</p>
 </li>
+<li>
+<p>Role based access requires authentication. Authentication is performed using JaaS for operations which require specific roles such as <em>admin</em> or <em>user</em>, in a stateless way for each request. See <a href="https://github.com/remibantos/jeeshop#security-domain-configuration">this link</a> for details about JaaS configuration in Jeeshop backend.</p>
+</li>
 </ul>
 </div>
 <div class="sect2">
@@ -693,6 +696,25 @@ Possible values are :
 <td class="tableblock halign-left valign-top"><p class="tableblock">sort direction. Defaults to <em>false</em>.<br>
 Possible values are :
 <em>true</em> | <em>false</em></p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -782,21 +804,28 @@ Possible values are :
 </table></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Hyperbike catalog</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Catalog of Hyperbike store</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>:<span class="string"><span class="delimiter">&quot;</span><span class="content"> null,
-  </span><span class="delimiter">&quot;</span></span>visible<span class="string"><span class="delimiter">&quot;</span><span class="content">: true,
-  </span><span class="delimiter">&quot;</span></span>localizedPresentation<span class="string"><span class="delimiter">&quot;</span><span class="content">: null,
-  </span><span class="delimiter">&quot;</span></span>rootCategoriesIds<span class="string"><span class="delimiter">&quot;</span><span class="content">: null
-}</span></span></code></pre>
-</div>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/catalog_count.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -853,6 +882,33 @@ Possible values are :
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation item (localized content) in response</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When provided authenticated has user role (not admin) and item is not visible</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -945,6 +1001,25 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -1035,6 +1110,29 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -1105,6 +1203,29 @@ Mandatory properties are : <em>name</em></p></td>
 </tbody>
 </table></div></td>
 </tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1154,6 +1275,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">catalog item id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">id of the catalog item</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1220,6 +1364,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1302,6 +1469,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1418,6 +1608,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When there is an existing presentation configured for given locale</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -1529,6 +1746,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When not presentation found matching given parameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -1606,6 +1850,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation items (localized content) matching given locale</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found with given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1727,6 +1994,25 @@ Possible values are :
 </table></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -1813,22 +2099,28 @@ Possible values are :
 </table></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">7</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">VTT</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">VTT rubric</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">childCategoriesIds</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">childProductsIds</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>
-}</code></pre>
-</div>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/category_count.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -1885,6 +2177,33 @@ Possible values are :
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation item (localized content) in response</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When provided authenticated has user role (not admin) and item is not visible</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -1982,6 +2301,25 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -2074,6 +2412,29 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -2145,6 +2506,29 @@ Mandatory properties are : <em>name</em></p></td>
 </tbody>
 </table></div></td>
 </tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -2194,6 +2578,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">category item id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">id of the category item</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -2260,6 +2667,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -2345,6 +2775,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -2467,6 +2920,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When there is an existing presentation configured for given locale</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -2584,6 +3064,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When not presentation found matching given parameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -2664,6 +3171,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation items (localized content) matching given locale</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found with given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -2755,6 +3285,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation items (localized content) matching given locale</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found with given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -2876,6 +3429,25 @@ Possible values are :
 </table></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -2962,22 +3534,28 @@ Possible values are :
 </table></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">2</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X2</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">VTT Energy X2</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1403067172000</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1402980772000</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">childSKUsIds</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">discountsIds</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>
-}</code></pre>
-</div>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/product_count.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -3034,6 +3612,33 @@ Possible values are :
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation item (localized content) in response</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When provided authenticated has user role (not admin) and item is not visible</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -3131,6 +3736,25 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -3223,6 +3847,29 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -3294,6 +3941,29 @@ Mandatory properties are : <em>name</em></p></td>
 </tbody>
 </table></div></td>
 </tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -3343,6 +4013,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">product item id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">id of the product item</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -3409,6 +4102,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -3497,6 +4213,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -3625,6 +4364,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When there is an existing presentation configured for given locale</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -3748,6 +4514,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When not presentation found matching given parameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -3831,6 +4624,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation items (localized content) matching given locale</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found with given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -3932,6 +4748,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation items (localized content) matching given locale</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found with given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -4067,6 +4906,25 @@ Possible values are :
 </table></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -4163,27 +5021,28 @@ Possible values are :
 </table></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 10</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 10</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1403067172000</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1412139172000</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">price</span><span class="delimiter">&quot;</span></span>: <span class="float">10.0</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">currency</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">reference</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">X1213JJLB-1</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">threshold</span><span class="delimiter">&quot;</span></span>: <span class="integer">3</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">quantity</span><span class="delimiter">&quot;</span></span>: <span class="integer">100</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">discountsIds</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">available</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>
-}</code></pre>
-</div>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/sku_count.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -4240,6 +5099,33 @@ Possible values are :
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation item (localized content) in response</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When provided authenticated has user role (not admin) and item is not visible</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -4347,6 +5233,25 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -4449,6 +5354,29 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -4525,6 +5453,29 @@ Mandatory properties are : <em>name</em></p></td>
 </tbody>
 </table></div></td>
 </tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -4574,6 +5525,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">sku item id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">id of the sku item</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -4640,6 +5614,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -4722,6 +5719,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -4838,6 +5858,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When there is an existing presentation configured for given locale</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -4949,6 +5996,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When not presentation found matching given parameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -5026,6 +6100,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation items (localized content) matching given locale</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found with given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -5161,6 +6258,25 @@ Possible values are :
 </table></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -5261,29 +6377,28 @@ Possible values are :
 </table></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">4</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">First order - 10 percent</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">10 percent off for user first order</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">voucherCode</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">usesPerCustomer</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">DISCOUNT_RATE</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">triggerRule</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER_NUMBER</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">applicableTo</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">ORDER</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">triggerValue</span><span class="delimiter">&quot;</span></span>: <span class="float">1.0</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">discountValue</span><span class="delimiter">&quot;</span></span>: <span class="float">20.0</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">rateType</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">uniqueUse</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>
-}</code></pre>
-</div>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/discount_count.json.adoc[]</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -5340,6 +6455,33 @@ Possible values are :
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation item (localized content) in response</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">403</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When provided authenticated has user role (not admin) and item is not visible</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -5451,6 +6593,25 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -5557,6 +6718,29 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -5635,6 +6819,29 @@ Mandatory properties are : <em>name</em></p></td>
 </tbody>
 </table></div></td>
 </tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -5684,6 +6891,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">discount item id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">id of the discount item</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -5750,6 +6980,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -5832,6 +7085,29 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -5948,6 +7224,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When there is an existing presentation configured for given locale</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -6059,6 +7362,33 @@ Mandatory properties are : <em>name</em></p></td>
 </div></div></td>
 </tr>
 <tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When not presentation found matching given parameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
@@ -6138,6 +7468,22 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided to get localized related presentation item (localized content) in response</p></td>
 </tr>
 </tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
 </table></div></td>
 </tr>
 <tr>
@@ -6196,7 +7542,7 @@ Mandatory properties are : <em>name</em></p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-04 23:21:58 CEST
+Last updated 2015-06-09 16:11:06 CEST
 </div>
 </div>
 </body>

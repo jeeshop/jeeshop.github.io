@@ -4,5 +4,6 @@
   "home" : "Home",
   "doc.jeeshopadmin.userguide" : "Jeeshop-Admin user guide",
   "doc.backend.catalog.api" : "Catalog REST API",
+  "doc.backend.user.api" : "User REST API",
   "doc.install" : "Install"
 }

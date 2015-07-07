@@ -1,12 +1,12 @@
 {
   "learn.more" : "En savoir plus",
   "slide1.title" : "Développez votre boutique",
-  "slide1.description" : "Développez rapidement votre boutique à l'aide de technologies récentes, Java EE 7 et AngularJS.",
-  "slide1.fulldescription" : "A compléter !",
+  "slide1.description" : "Développez rapidement votre boutique à l'aide de technologies innovantes.",
+  "slide1.fulldescription" : "Jeeshop est une solution e-commerce vous permettant  de construire rapidement votre boutique en ligne.<br/>Elle comprend un outil d'administration, <a href=\"https://github.com/remibantos/jeeshop/blob/master/README.md#Jeeshop-Admin\">Jeeshop-admin</a> ainsi qu'un ensemble d'APIs REST conçues pour activer des operations e-commerce dans votre front-end de boutique",
   "slide2.title" : "Gérez votre boutique",
   "slide2.description" : "Gérez efficacement votre commerce avec Jeeshop-Admin, depuis votre poste de travail ou votre smartphone.",
-  "slide2.fulldescription" : "A compléter !",
+  "slide2.fulldescription" : "<a href=\"https://github.com/remibantos/jeeshop/blob/master/README.md#Jeeshop-Admin\">Jeeshop-admin</a> est une application AngularJS au design responsif conçue pour gérer efficacement votre boutique en ligne. Elle consomme les APIs REST backend de Jeeshop pour effectuer des opérations courantes de gestion de boutique en ligne : <ul><li>Gestion des catalogues produit</li><li>Gestion des promotions</li><li>Suivi des commandes</li><li>Gestion des clients</li><li>Emailing</li></ul>",
   "slide3.title" : "Participez",
   "slide3.description" : "Contribuez au développement de Jeeshop, un projet open-source sous license Apache V2.",
-  "slide3.fulldescription" : "A compléter !"
+  "slide3.fulldescription" : "Jees"
 }
