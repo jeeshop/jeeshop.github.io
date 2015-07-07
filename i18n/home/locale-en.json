@@ -1,12 +1,12 @@
 {
   "learn.more" : "Learn more",
   "slide1.title" : "Build your e-commerce",
-  "slide1.description" : "Build your e-commerce using recent technologies, Java EE 7 and AngularJS.",
-  "slide1.fulldescription" : "To be completed",
+  "slide1.description" : "Build your e-commerce using innovative technologies.",
+  "slide1.fulldescription" : "Jeeshop e-commerce solution eases build of your online store.<br/>It contains a store administration tool, <a href=\"https://github.com/remibantos/jeeshop/blob/master/README.md#Jeeshop-Admin\">Jeeshop-admin</a>, and a set of REST APIs able to handle all front-end e-commerce operations.",
   "slide2.title" : "Manage your store",
   "slide2.description" : "Manage effectively your e-commerce using Jeeshop-Admin, from your workstation or a smartphone.",
-  "slide2.fulldescription" : "To be completed",
+  "slide2.fulldescription" : "<a href=\"https://github.com/remibantos/jeeshop/blob/master/README.md#Jeeshop-Admin\">Jeeshop-admin</a> is a responsive designed AngularJS application made to manage efficiently your online store. It allows you to perform common store management operations such as : <ul><li>Product catalogs management</li><li>Promotions configuration</li><li>Order tracking</li><li>Customers management</li><li>Emailing tasks</li></ul>",
   "slide3.title" : "Contribute",
   "slide3.description" : "Contribute to Jeeshop, an open-source Apache V2 licensed project.",
-  "slide3.fulldescription" : "To be completed"
+  "slide3.fulldescription" : "Jeeshop project code source are available on <a href=\"https://github.com/remibantos/jeeshop\">GitHub</a>. <br/>First release of Jeeshop, <a href=\"https://github.com/remibantos/jeeshop/milestones/jeeshop-1.0-alpha\">jeeshop-1.0-alpha</a>, is under construction."
 }
