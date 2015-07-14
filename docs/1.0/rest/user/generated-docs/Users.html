@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>User Resource</title>
+<title>User resource</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -506,18 +506,19 @@ table.CodeRay td.code>pre{padding:0}
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel2">
-<li><a href="#user-resource">1. User Resource</a>
+<li><a href="#user-resource">1. User resource</a>
 <ul class="sectlevel3">
 <li><a href="#get-all-users">1.1. Get all users</a></li>
 <li><a href="#get-users-count">1.2. Get users count</a></li>
 <li><a href="#get-a-specific-user">1.3. Get a specific user</a></li>
-<li><a href="#create-a-user">1.4. Create a user</a></li>
-<li><a href="#modify-a-user">1.5. Modify a user</a></li>
-<li><a href="#delete-a-user">1.6. Delete a user</a></li>
-<li><a href="#activate-a-user">1.7. Activate a user</a></li>
-<li><a href="#request-user-password-reset">1.8. Request user password reset</a></li>
-<li><a href="#reset-user-password">1.9. Reset user password</a></li>
-<li><a href="#authenticate-a-user">1.10. Authenticate a user</a></li>
+<li><a href="#get-current-authenticated-user">1.4. Get current authenticated user</a></li>
+<li><a href="#create-a-user">1.5. Create a user</a></li>
+<li><a href="#modify-a-user">1.6. Modify a user</a></li>
+<li><a href="#delete-a-user">1.7. Delete a user</a></li>
+<li><a href="#activate-a-user">1.8. Activate a user</a></li>
+<li><a href="#request-user-password-reset">1.9. Request user password reset</a></li>
+<li><a href="#reset-user-password">1.10. Reset user password</a></li>
+<li><a href="#authenticate-a-user">1.11. Authenticate a user</a></li>
 </ul>
 </li>
 </ul>
@@ -525,7 +526,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="user-resource"><a class="anchor" href="#user-resource"></a>1. User Resource</h3>
+<h3 id="user-resource"><a class="anchor" href="#user-resource"></a>1. User resource</h3>
 <div class="paragraph">
 <p>Manages users.</p>
 </div>
@@ -778,7 +779,7 @@ Possible values are :
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No user found matching given parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No result found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -793,7 +794,65 @@ Possible values are :
 </table>
 </div>
 <div class="sect3">
-<h4 id="create-a-user"><a class="anchor" href="#create-a-user"></a>1.4. Create a user</h4>
+<h4 id="get-current-authenticated-user"><a class="anchor" href="#get-current-authenticated-user"></a>1.4. Get current authenticated user</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/users/current</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No result found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/user.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="create-a-user"><a class="anchor" href="#create-a-user"></a>1.5. Create a user</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -886,7 +945,7 @@ Mandatory properties are : <em>login</em>, <em>password</em>, <em>firstname</em>
 </table>
 </div>
 <div class="sect3">
-<h4 id="modify-a-user"><a class="anchor" href="#modify-a-user"></a>1.5. Modify a user</h4>
+<h4 id="modify-a-user"><a class="anchor" href="#modify-a-user"></a>1.6. Modify a user</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -975,7 +1034,7 @@ Mandatory properties are : <em>login</em>, <em>password</em>, <em>firstname</em>
 </table>
 </div>
 <div class="sect3">
-<h4 id="delete-a-user"><a class="anchor" href="#delete-a-user"></a>1.6. Delete a user</h4>
+<h4 id="delete-a-user"><a class="anchor" href="#delete-a-user"></a>1.7. Delete a user</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1047,7 +1106,7 @@ Mandatory properties are : <em>login</em>, <em>password</em>, <em>firstname</em>
 </table>
 </div>
 <div class="sect3">
-<h4 id="activate-a-user"><a class="anchor" href="#activate-a-user"></a>1.7. Activate a user</h4>
+<h4 id="activate-a-user"><a class="anchor" href="#activate-a-user"></a>1.8. Activate a user</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1138,7 +1197,7 @@ Mandatory properties are : <em>login</em>, <em>password</em>, <em>firstname</em>
 </table>
 </div>
 <div class="sect3">
-<h4 id="request-user-password-reset"><a class="anchor" href="#request-user-password-reset"></a>1.8. Request user password reset</h4>
+<h4 id="request-user-password-reset"><a class="anchor" href="#request-user-password-reset"></a>1.9. Request user password reset</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1214,7 +1273,7 @@ Mandatory properties are : <em>login</em>, <em>password</em>, <em>firstname</em>
 </table>
 </div>
 <div class="sect3">
-<h4 id="reset-user-password"><a class="anchor" href="#reset-user-password"></a>1.9. Reset user password</h4>
+<h4 id="reset-user-password"><a class="anchor" href="#reset-user-password"></a>1.10. Reset user password</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1304,7 +1363,7 @@ Mandatory properties are : <em>login</em>, <em>password</em>, <em>firstname</em>
 </table>
 </div>
 <div class="sect3">
-<h4 id="authenticate-a-user"><a class="anchor" href="#authenticate-a-user"></a>1.10. Authenticate a user</h4>
+<h4 id="authenticate-a-user"><a class="anchor" href="#authenticate-a-user"></a>1.11. Authenticate a user</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -1379,7 +1438,7 @@ Mandatory properties are : <em>login</em>, <em>password</em>, <em>firstname</em>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-07 18:49:25 CEST
+Last updated 2015-07-14 13:10:50 CEST
 </div>
 </div>
 </body>

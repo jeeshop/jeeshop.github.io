@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>Untitled</title>
+<title>Mail template resource</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -505,35 +505,519 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-
+<ul class="sectlevel2">
+<li><a href="#mail-template-resource">1. Mail template resource</a>
+<ul class="sectlevel3">
+<li><a href="#get-all-mail-templates">1.1. Get all mail templates</a></li>
+<li><a href="#get-mail-templates-count">1.2. Get mail templates count</a></li>
+<li><a href="#get-a-specific-mail-template">1.3. Get a specific mail template</a></li>
+<li><a href="#create-a-mail-template">1.4. Create a mail template</a></li>
+<li><a href="#modify-a-mail-template">1.5. Modify a mail template</a></li>
+<li><a href="#delete-a-mail-template">1.6. Delete a mail template</a></li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 <div id="content">
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 10</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 10</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1403067172000</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1412139172000</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">price</span><span class="delimiter">&quot;</span></span>: <span class="float">10.0</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">currency</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">reference</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">X1213JJLB-1</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">threshold</span><span class="delimiter">&quot;</span></span>: <span class="integer">3</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">quantity</span><span class="delimiter">&quot;</span></span>: <span class="integer">100</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">discountsIds</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">available</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>
-}</code></pre>
+<div class="sect2">
+<h3 id="mail-template-resource"><a class="anchor" href="#mail-template-resource"></a>1. Mail template resource</h3>
+<div class="paragraph">
+<p>Manages mail templates.</p>
+</div>
+<div class="sect3">
+<h4 id="get-all-mail-templates"><a class="anchor" href="#get-all-mail-templates"></a>1.1. Get all mail templates</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/mailtemplates</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template name to search</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">start</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">results start offset</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">results size</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">orderBy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort criteria. Defaults to <em>id</em>.<br>
+Possible values are :
+<em>id</em> | <em>name</em> | <em>locale</em> | <em>creationDate</em> | <em>updateDate</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isDesc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort direction. Defaults to <em>false</em>.<br>
+Possible values are :
+<em>true</em> | <em>false</em></p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/MailTemplate.list.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="get-mail-templates-count"><a class="anchor" href="#get-mail-templates-count"></a>1.2. Get mail templates count</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/mailtemplates/count</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate_count.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="get-a-specific-mail-template"><a class="anchor" href="#get-a-specific-mail-template"></a>1.3. Get a specific mail template</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/mailtemplates/[id]</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id of the mail template to retrieve</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No result found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="create-a-mail-template"><a class="anchor" href="#create-a-mail-template"></a>1.4. Create a mail template</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/mailtemplates</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>POST</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The mail template to create.<br>
+Mandatory properties are : <em>name</em>, <em>content</em>, <em>subject</em></p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate.in.json.adoc[]</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When a mailtemplate with same name and locale already exists</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="modify-a-mail-template"><a class="anchor" href="#modify-a-mail-template"></a>1.5. Modify a mail template</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/mailtemplates</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>PUT</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template item</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The mail template to modify.<br>
+Mandatory properties are : <em>name</em>, <em>content</em>, <em>subject</em></p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/ma template.json.adoc[]</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">409</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When a mailtemplate with same name and locale but another id already exists</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/mailtemplate.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="delete-a-mail-template"><a class="anchor" href="#delete-a-mail-template"></a>1.6. Delete a mail template</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/mailtemplates/[id]</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>DELETE</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Mail template id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id of the mail template to delete</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-04 23:06:52 CEST
+Last updated 2015-07-14 13:10:50 CEST
 </div>
 </div>
 </body>

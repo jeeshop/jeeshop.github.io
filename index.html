@@ -60,9 +60,13 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">Documentation<span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
+                                <li class="dropdown-header">{{'doc.guides' | translate}}</li>
                                 <li><a target="_blank" href="https://github.com/remibantos/jeeshop#readme">{{'doc.userguide' | translate}}</a></li>
-                                <li><a target="_blank" href="docs/1.0/rest/catalog/generated-docs/rest-api.html" ng-bind-html="'doc.backend.catalog.api'|translate"></a></li>
-                                <li><a target="_blank" href="docs/1.0/rest/user/generated-docs/rest-api.html" ng-bind-html="'doc.backend.user.api'|translate"></a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">{{'doc.backend.api' | translate}}</li>
+                                <li><a target="_blank" href="docs/1.0/rest/catalog/generated-docs/rest-api.html" ng-bind="'doc.backend.catalog.api'|translate"></a></li>
+                                <li><a target="_blank" href="docs/1.0/rest/order/generated-docs/rest-api.html" ng-bind="'doc.backend.order.api'|translate"></a></li>
+                                <li><a target="_blank" href="docs/1.0/rest/user/generated-docs/rest-api.html" ng-bind="'doc.backend.user.api'|translate"></a></li>
                             </ul>
                         </li>
                         <!--<li><a ui-sref="about">{{'about'|translate}}</a></li>-->

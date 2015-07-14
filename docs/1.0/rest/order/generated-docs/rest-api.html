@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>Untitled</title>
+<title>Order REST API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -505,35 +505,692 @@ table.CodeRay td.code>pre{padding:0}
 <div id="header">
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
-
+<ul class="sectlevel1">
+<li><a href="#order-rest-api">1. Order REST API</a>
+<ul class="sectlevel2">
+<li><a href="#order-resource">1.1. Order resource</a>
+<ul class="sectlevel3">
+<li><a href="#get-user-all-orders">1.1.1. Get user/all orders</a></li>
+<li><a href="#get-orders-count">1.1.2. Get orders count</a></li>
+<li><a href="#get-a-specific-order">1.1.3. Get a specific order</a></li>
+<li><a href="#get-fixed-delivery-fee-configuration">1.1.4. Get fixed delivery fee configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </div>
 </div>
 <div id="content">
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">{
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">id</span><span class="delimiter">&quot;</span></span>: <span class="integer">1</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 10</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Energy X1 batch of 10</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">disabled</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">startDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1403067172000</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">endDate</span><span class="delimiter">&quot;</span></span>: <span class="integer">1412139172000</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">visible</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">false</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">localizedPresentation</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">price</span><span class="delimiter">&quot;</span></span>: <span class="float">10.0</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">currency</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">EUR</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">reference</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">X1213JJLB-1</span><span class="delimiter">&quot;</span></span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">threshold</span><span class="delimiter">&quot;</span></span>: <span class="integer">3</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">quantity</span><span class="delimiter">&quot;</span></span>: <span class="integer">100</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">discountsIds</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">null</span>,
-  <span class="key"><span class="delimiter">&quot;</span><span class="content">available</span><span class="delimiter">&quot;</span></span>: <span class="predefined-constant">true</span>
-}</code></pre>
+<div class="sect1">
+<h2 id="order-rest-api"><a class="anchor" href="#order-rest-api"></a>1. Order REST API</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The following general principles apply to every REST operations :
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Items relationships are always lazyloaded and must be explicitly requested to get them. (they are not eagerly fetched)</p>
+</li>
+<li>
+<p>Role based access requires authentication. Authentication is performed using JaaS for operations which require specific roles such as <em>admin</em> or <em>user</em>, in a stateless way for each request. See <a href="https://github.com/remibantos/jeeshop#security-domain-configuration">this link</a> for details about JaaS configuration in Jeeshop backend.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="order-resource"><a class="anchor" href="#order-resource"></a>1.1. Order resource</h3>
+<div class="paragraph">
+<p>Manages user orders.</p>
+</div>
+<div class="sect3">
+<h4 id="get-user-all-orders"><a class="anchor" href="#get-user-all-orders"></a>1.1.1. Get user/all orders</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/orders</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em>,<em>user</em><br>
+When authenticated user has <em>user</em> role and but not <em>admin</em> one, fetches only user&#8217;s orders.<br>
+When user has <em>admin</em> role, all orders are returned.</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search (applicable for <em>admin</em> role only)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search criteria. Value should match user&#8217;s  <em>login</em>, <em>first name</em>, or <em>last name</em> or order&#8217;s id, transaction id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">start</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">results start offset</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">size</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">results size</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">orderBy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort criteria. Defaults to <em>id</em>.<br>
+Possible values are :
+<em>id</em> | <em>owner</em> (user lastname) | <em>login</em>  | <em>status</em> | <em>creationDate</em> | _updateDate</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">isDesc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">sort direction. Defaults to <em>false</em>.<br>
+Possible values are :
+<em>true</em> | <em>false</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">order status.<br>
+Possible values are :
+<em>CREATED</em> | <em>VALIDATED</em> | <em>PAYMENT\_VALIDATED</em> | <em>CANCELLED</em> | <em>READY\_FOR\_SHIPMENT</em> | <em>SHIPPED</em> | <em>DELIVERED</em> | <em>RETURNED</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">skuId (applicable for <em>admin</em> role only)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id of sku related to order</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enhanced (applicable for <em>admin</em> role only)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean flag to get enhanced order with static order configuration and catalog related items.<br>
+Possible values are : <em>true</em> | <em>false</em></p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/Order.list.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="get-orders-count"><a class="anchor" href="#get-orders-count"></a>1.1.2. Get orders count</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/orders/count</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">search</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Search criteria. Value should match user&#8217;s  <em>login</em>, <em>first name</em>, or <em>last name</em> or order&#8217;s id, transaction id</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">order status.<br>
+Possible values are :
+<em>CREATED</em> | <em>VALIDATED</em> | <em>PAYMENT\_VALIDATED</em> | <em>CANCELLED</em> | <em>READY\_FOR\_SHIPMENT</em> | <em>SHIPPED</em> | <em>DELIVERED</em> | <em>RETURNED</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">skuId (applicable for <em>admin</em> role only)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id of sku related to order</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/order_count.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="get-a-specific-order"><a class="anchor" href="#get-a-specific-order"></a>1.1.3. Get a specific order</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/orders/[id]</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em>, <em>user</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33%;">
+<col style="width: 33%;">
+<col style="width: 33%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Mandatory</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">order id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id of the order item to retrieve</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enhanced</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean flag to get enhanced order with static order configuration and catalog related items.<br>
+Possible values are : <em>true</em> | <em>false</em></p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">401</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When requested order does not belong to user</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No result found matching given parameters</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/order.json.adoc[]</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="get-fixed-delivery-fee-configuration"><a class="anchor" href="#get-fixed-delivery-fee-configuration"></a>1.1.4. Get fixed delivery fee configuration</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 16%;">
+<col style="width: 83%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>/rs/orders/fixeddeliveryfee</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>GET</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><em>admin</em></p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
+</tr>
+</tbody>
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Unresolved directive in &lt;stdin&gt; - include::snippets/order.fixeddeliveryfee.json.adoc[]</p>
+</div>
+<div class="sect3">
+<h4 id="create-an-order"><a class="anchor" href="#create-an-order"></a>1. Create an order</h4>
+
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>| URL
+| /rs/orders</p>
+</div>
+<div class="paragraph">
+<p>| Method
+| POST</p>
+</div>
+<div class="paragraph">
+<p>| Description
+| Create provided order and performs operations such as validation, pricing, payment triggering &#8230;&#8203; See user guide (TODO) for details</p>
+</div>
+<div class="paragraph">
+<p>| Roles allowed
+| <em>admin</em>, <em>user</em><br></p>
+</div>
+<div class="paragraph">
+<p>For <em>user</em> role, this order will be bound to current authenticated user.<br>
+For <em>admin</em> role, userLogin parameter must be provided to bind related user to this order.</p>
+</div>
+<div class="paragraph">
+<p>| Parameters
+|</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">! Name ! Mandatory ! Description
+
+! order item
+! Yes
+! The order to create.<br>
+
+! userLogin item (applicable to <em>admin</em> role only)
+! Yes
+! The login of a user to link to this order.<br></th>
+</tr>
+</thead>
+</table>
+<div class="paragraph">
+<p>| Request Body
+| include::snippets/order.in.json.adoc[]</p>
+</div>
+<div class="paragraph">
+<p>| Response HTTP statuses
+|</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">! Code ! Meaning
+! 200
+! Success
+! 400
+! When provided order validation process fails or when related entities have an id defined. (Id is created during persistence and cannot be provided for entity creation).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">include::snippets/user.json.adoc[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">====
+</p><p class="tableblock">==== Modify an order
+</p><p class="tableblock">[cols="h,5a"]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">====</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URL</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">/rs/users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Method</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PUT</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>admin</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>! Name ! Mandatory ! Description</p>
+</div>
+<div class="paragraph">
+<p>! order item
+! Yes
+! The order to modify.<br></p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">include::snippets/order.json.adoc[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>! Code ! Meaning
+! 200
+! Success
+! 404
+! Not found</p>
+</div>
+<div class="paragraph">
+<p>| Response Body
+| include::snippets/order.json.adoc[]</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">==== Delete an order
+</p><p class="tableblock">[cols="h,5a"]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>| URL
+| /rs/orders/[id]</p>
+</div>
+<div class="paragraph">
+<p>| Method
+| DELETE</p>
+</div>
+<div class="paragraph">
+<p>| Roles allowed
+| <em>admin</em></p>
+</div>
+<div class="paragraph">
+<p>| Parameters
+|</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">! Name ! Mandatory ! Description
+
+! order id
+! Yes
+! id of the order to delete</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>! Code ! Meaning
+! 200
+! Success</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">=== Eligible order discounts resource
+</p><p class="tableblock">Manages user orders.
+</p><p class="tableblock">==== Get eligible order discounts
+</p><p class="tableblock">[cols="h,5a"]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>| URL
+| /rs/discounts/eligible</p>
+</div>
+<div class="paragraph">
+<p>| Method
+| GET</p>
+</div>
+<div class="paragraph">
+<p>| Description
+| Returns all discounts eligible for current authenticated user&#8217;s next order.</p>
+</div>
+<div class="paragraph">
+<p>| Roles allowed
+| <em>user</em></p>
+</div>
+<div class="paragraph">
+<p>| Parameters
+|</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">! Name ! Mandatory ! Description
+
+! locale
+! No
+! For sample <em>en_GB</em>. Can be provided get localized related presentation item (localized content) in response</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>! Code ! Meaning
+! 200
+! Success</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">include::snippets/Discount.list.json.adoc[]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">====</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-04 23:06:52 CEST
+Last updated 2015-07-14 13:11:54 CEST
 </div>
 </div>
 </body>

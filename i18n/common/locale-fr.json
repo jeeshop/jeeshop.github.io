@@ -2,7 +2,10 @@
   "title" : "Build your JavaEE shop",
   "about" : "A propos",
   "home" : "Accueil",
+  "doc.guides" : "GUIDES",
   "doc.userguide" : "Guide utilisateur",
-  "doc.backend.catalog.api" : "API REST <i>Catalog</i>",
-  "doc.backend.user.api" : "API REST <i>User</i>"
+  "doc.backend.api" : "API REST",
+  "doc.backend.catalog.api" : "Catalog",
+  "doc.backend.order.api" : "Order",
+  "doc.backend.user.api" : "User"
 }
