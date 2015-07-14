@@ -5,7 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.2">
-<title>{resourceName} resource</title>
+<title>Medias resource</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -506,20 +506,10 @@ table.CodeRay td.code>pre{padding:0}
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel2">
-<li><a href="#resourcename-resource">1. {resourceName} resource</a>
+<li><a href="#medias-resource">1. Medias resource</a>
 <ul class="sectlevel3">
-<li><a href="#get-all-itemtype-items">1.1. Get all {itemType} items</a></li>
-<li><a href="#get-itemtype-items-count">1.2. Get {itemType} items count</a></li>
-<li><a href="#get-a-specific-itemtype">1.3. Get a specific {itemType}</a></li>
-<li><a href="#create-a-itemtype">1.4. Create a {itemType}</a></li>
-<li><a href="#modify-a-itemtype">1.5. Modify a {itemType}</a></li>
-<li><a href="#delete-a-itemtype">1.6. Delete a {itemType}</a></li>
-<li><a href="#get-itemtype-related-locales">1.7. Get {itemType} related locales</a></li>
-<li><a href="#get-itemtype-localized-content">1.8. Get {itemType} localized content</a></li>
-<li><a href="#delete-itemtype-localized-content">1.9. Delete {itemType} localized content</a></li>
-<li><a href="#create-itemtype-localized-content">1.10. Create {itemType} localized content</a></li>
-<li><a href="#modify-itemtype-localized-content">1.11. Modify {itemType} localized content</a></li>
-<li><a href="#get-all-eligible-disounct-items-related-to-an-order-or-an-item">1.12. Get all eligible disounct items related to an order or an item</a></li>
+<li><a href="#get-a-specific-media-file">1.1. Get a specific media file</a></li>
+<li><a href="#upload-a-media-file">1.2. Upload a media file</a></li>
 </ul>
 </li>
 </ul>
@@ -527,12 +517,9 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div id="content">
 <div class="sect2">
-<h3 id="resourcename-resource"><a class="anchor" href="#resourcename-resource"></a>1. {resourceName} resource</h3>
-<div class="paragraph">
-<p>Manages {itemType} items and their relationships.</p>
-</div>
+<h3 id="medias-resource"><a class="anchor" href="#medias-resource"></a>1. Medias resource</h3>
 <div class="sect3">
-<h4 id="get-all-itemtype-items"><a class="anchor" href="#get-all-itemtype-items"></a>1.1. Get all {itemType} items</h4>
+<h4 id="get-a-specific-media-file"><a class="anchor" href="#get-a-specific-media-file"></a>1.1. Get a specific media file</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -542,7 +529,7 @@ table.CodeRay td.code>pre{padding:0}
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}</p>
+<p>/rs/medias/[type]/[id]/[locale]/[filename]</p>
 </div></div></td>
 </tr>
 <tr>
@@ -574,194 +561,24 @@ table.CodeRay td.code>pre{padding:0}
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">search</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Search criteria. Value should match item&#8217;s <em>id</em>, <em>name</em> or <em>description</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">start</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">results start offset</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">size</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">results size</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">orderBy</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort criteria. Defaults to <em>id</em>.<br>
-Possible values are :
-<em>id</em> | <em>name</em> | <em>description</em> | <em>startDate</em> | <em>endDate</em> | <em>disabled</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">isDesc</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">sort direction. Defaults to <em>false</em>.<br>
-Possible values are :
-<em>true</em> | <em>false</em></p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.list.json.adoc[]</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="get-itemtype-items-count"><a class="anchor" href="#get-itemtype-items-count"></a>1.2. Get {itemType} items count</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/count</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GET</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">search</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Search criteria. Value should match item&#8217;s <em>id</em>, <em>name</em> or <em>description</em></p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}_count.json.adoc[]</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="get-a-specific-itemtype"><a class="anchor" href="#get-a-specific-itemtype"></a>1.3. Get a specific {itemType}</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GET</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>ALL</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item to retrieve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Media related item type such as "product" or "category"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Media related item id</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided for <em>user</em> role to get localized related presentation item (localized content) in response</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filename</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">media file name</p></td>
 </tr>
 </tbody>
 </table></div></td>
@@ -783,27 +600,17 @@ Possible values are :
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">403</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When provided authenticated has user role (not admin) and item is not visible</p></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No result found matching given parameters</p></td>
 </tr>
 </tbody>
 </table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.json.adoc[]</p>
-</div></div></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
-<h4 id="create-a-itemtype"><a class="anchor" href="#create-a-itemtype"></a>1.4. Create a {itemType}</h4>
+<h4 id="upload-a-media-file"><a class="anchor" href="#upload-a-media-file"></a>1.2. Upload a media file</h4>
 <table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 16%;">
@@ -813,7 +620,7 @@ Possible values are :
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}</p>
+<p>/rs/medias/[type]/[id]/[locale]/upload</p>
 </div></div></td>
 </tr>
 <tr>
@@ -825,7 +632,7 @@ Possible values are :
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
+<p><em>admin</em><br></p>
 </div></div></td>
 </tr>
 <tr>
@@ -845,730 +652,32 @@ Possible values are :
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The {itemType} item to create.<br>
-Mandatory properties are : <em>name</em></p></td>
-</tr>
-</tbody>
-</table></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Media related item type such as "product" or "category"</p></td>
 </tr>
 <tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.in.json.adoc[]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.json.adoc[]</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="modify-a-itemtype"><a class="anchor" href="#modify-a-itemtype"></a>1.5. Modify a {itemType}</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>PUT</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">id</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The {itemType} item to modify.<br>
-Mandatory properties are : <em>name</em></p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.json.adoc[]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.json.adoc[]</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="delete-a-itemtype"><a class="anchor" href="#delete-a-itemtype"></a>1.6. Delete a {itemType}</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>DELETE</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item to delete</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="get-itemtype-related-locales"><a class="anchor" href="#get-itemtype-related-locales"></a>1.7. Get {itemType} related locales</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentationslocales</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GET</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="javascript">[<span class="string"><span class="delimiter">&quot;</span><span class="content">fr_FR</span><span class="delimiter">&quot;</span></span>,<span class="string"><span class="delimiter">&quot;</span><span class="content">en_GB</span><span class="delimiter">&quot;</span></span>]</code></pre>
-</div>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="get-itemtype-localized-content"><a class="anchor" href="#get-itemtype-localized-content"></a>1.8. Get {itemType} localized content</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentations/[locale]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GET</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>ALL</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="delete-itemtype-localized-content"><a class="anchor" href="#delete-itemtype-localized-content"></a>1.9. Delete {itemType} localized content</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentations/[locale]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>DELETE</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="create-itemtype-localized-content"><a class="anchor" href="#create-itemtype-localized-content"></a>1.10. Create {itemType} localized content</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentations/[locale]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>POST</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Presentation object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a valid Presentation object</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When there is an existing presentation configured for given locale</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="modify-itemtype-localized-content"><a class="anchor" href="#modify-itemtype-localized-content"></a>1.11. Modify {itemType} localized content</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/[id]/presentations/[locale]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>PUT</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><em>admin</em></p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{itemType} item id</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">id of the {itemType} item</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Presentation object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a valid Presentation object</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Request Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Code</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Meaning</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">400</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When not presentation found matching given parameters</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">404</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">When no item found matching given parameters</p></td>
-</tr>
-</tbody>
-</table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.presentation.json.adoc[]</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect3">
-<h4 id="get-all-eligible-disounct-items-related-to-an-order-or-an-item"><a class="anchor" href="#get-all-eligible-disounct-items-related-to-an-order-or-an-item"></a>1.12. Get all eligible disounct items related to an order or an item</h4>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 16%;">
-<col style="width: 83%;">
-</colgroup>
-<tbody>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">URL</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/rs/{resourcePath}/visible</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Method</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GET</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Roles allowed</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>ALL</p>
-</div></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></th>
-<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 33%;">
-<col style="width: 33%;">
-<col style="width: 33%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Mandatory</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">applicableTo</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Possible values are : <em>ORDER</em>, <em>ITEM</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Media related item id</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">locale</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em>. Can be provided to get localized related presentation item (localized content) in response</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For sample <em>en_GB</em></p></td>
 </tr>
 </tbody>
-</table>
-<table class="tableblock frame-all grid-all spread">
+</table></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Request header</p></th>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Content-Type = "multipart/form-data"</p>
+</div></div></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Response HTTP statuses</p></th>
+<td class="tableblock halign-left valign-top"><div><table class="tableblock frame-all grid-all spread">
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1582,14 +691,12 @@ Mandatory properties are : <em>name</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">200</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Success</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">500</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">In case of internal error during upload</p></td>
+</tr>
 </tbody>
 </table></div></td>
-</tr>
-<tr>
-<th class="tableblock halign-left valign-top"><p class="tableblock">Response Body</p></th>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Unresolved directive in &lt;stdin&gt; - include::snippets/{itemType}.list.json.adoc[]</p>
-</div></div></td>
 </tr>
 </tbody>
 </table>
@@ -1598,7 +705,7 @@ Mandatory properties are : <em>name</em></p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-07-14 14:19:25 CEST
+Last updated 2015-07-14 16:51:42 CEST
 </div>
 </div>
 </body>
