@@ -1,7 +1,7 @@
 {
   "learn.more" : "Learn more",
   "slide1.title" : "Build your e-commerce",
-  "slide1.description" : "Build your e-commerce using proven innovative technologies. (Java EE 7, AngularJS)",
+  "slide1.description" : "Build your e-commerce using proven innovative technologies. (Java EE 7, REST API, Javascript front-end ...)",
   "slide1.fulldescription" : "<p><i>Jeeshop</i> e-commerce solution makes setup of your online store easy.</p><p>It provides store management tools, <a href=\"https://github.com/remibantos/jeeshop/blob/master/README.md#Jeeshop-Admin\"><i>Jeeshop-Admin</i></a>, and a set of REST APIs able to handle all front-end e-commerce operations.</p>",
   "slide2.title" : "Manage your store",
   "slide2.description" : "Manage effectively your e-commerce using <i>Jeeshop-Admin</i>, from your workstation or a smartphone.",
