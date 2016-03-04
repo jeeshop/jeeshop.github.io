@@ -1,4 +1,6 @@
 jeeshop.github.io
 =================
 
-Work In Progress!
+[Jeeshop](https://github.com/remibantos/jeeshop) project documentation website.
+
+http://www.jeeshop.org
